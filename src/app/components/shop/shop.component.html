@@ -1,0 +1,54 @@
+<section class="shop spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">Nuestra Tienda</h2>
+      </div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div class="text-center py-5" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando productos...</p>
+    </div>
+
+    <!-- Error message -->
+    <div class="alert alert-danger" *ngIf="error">
+      {{ error }}
+    </div>
+
+    <!-- Products grid -->
+    <div class="row products-container" *ngIf="!loading && !error">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
+        <div class="product-item" *ngIf="product">
+          <div class="product-img">
+            <img
+              *ngIf="product.images && product.images.length > 0"
+              [src]="product.images[0]"
+              alt="{{ product.title }}"
+              class="img-fluid"
+            />
+          </div>
+          <div class="product-info">
+            <h5>{{ product.title }}</h5>
+            <h6 class="price">${{ product.price }}</h6>
+            <button class="primary-btn">Añadir al carrito</button>
+          </div>
+        </div>
+        <div *ngIf="!product" class="no-product">
+          No hay productos disponibles
+        </div>
+      </div>
+    </div>
+
+    <!-- No products message -->
+    <div
+      class="text-center py-5"
+      *ngIf="!loading && !error && products.length === 0"
+    >
+      <p>No hay productos disponibles en este momento.</p>
+    </div>
+  </div>
+</section>

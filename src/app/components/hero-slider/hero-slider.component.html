@@ -1,0 +1,42 @@
+<section class="hero">
+  <div class="hero__slider">
+    <div
+      *ngFor="let image of images; let i = index"
+      class="hero__items set-bg"
+      [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+      [class.active]="i === currentIndex"
+    >
+      <div class="hero__content">
+        <h6>
+          <b>{{ colection | uppercase }}</b>
+        </h6>
+        <br />
+        <h2>
+          <b>{{ tittle }}</b>
+        </h2>
+        <br />
+        <p>{{ description }}</p>
+        <br />
+        <a href="#" class="primary-btn"
+          >Compra ahora <span class="arrow_right"></span
+        ></a>
+        <div class="hero__social">
+          <a target="_blank" href="https://www.facebook.com/?locale=es_LA"
+            ><i class="fa fa-facebook"></i
+          ></a>
+          <a target="_blank" href="https://x.com/?lang=es"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a target="_blank" href="https://co.pinterest.com/"
+            ><i class="fa fa-pinterest"></i
+          ></a>
+          <a target="_blank" href="https://www.instagram.com/"
+            ><i class="fa fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="prev" (click)="prevSlide()">&#10094;</button>
+  <button id="next" (click)="nextSlide()">&#10095;</button>
+</section>
