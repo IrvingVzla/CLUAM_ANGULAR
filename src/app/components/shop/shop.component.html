@@ -34,7 +34,9 @@
           <div class="product-info">
             <h5>{{ product.title }}</h5>
             <h6 class="price">${{ product.price }}</h6>
-            <button class="primary-btn">Añadir al carrito</button>
+            <button class="primary-btn" (click)="addProductToCart(product)">
+              Añadir al carrito
+            </button>
           </div>
         </div>
         <div *ngIf="!product" class="no-product">

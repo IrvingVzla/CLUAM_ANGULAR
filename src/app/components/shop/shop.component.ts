@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart-service.service';
 
 @Component({
   selector: 'app-shop',
@@ -15,18 +16,18 @@ export class ShopComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cartService: CartService) {}
 
   ngOnInit() {
     this.http
       .get<Product[]>('https://api.escuelajs.co/api/v1/products')
       .subscribe({
         next: (data) => {
-          //this.products = data;
+          this.products = data;
 
-          this.products = data.filter(
+          /*this.products = data.filter(
             (product) => product.category?.name === 'Clothes'
-          );
+          );*/
 
           console.log(this.products);
           this.loading = false;
@@ -38,5 +39,9 @@ export class ShopComponent implements OnInit {
           console.error('Error cargando productos:', err);
         },
       });
+  }
+
+  addProductToCart(product: Product): void {
+    this.cartService.addToCart(product);
   }
 }

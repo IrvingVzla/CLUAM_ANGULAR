@@ -12,10 +12,23 @@ import { ShopComponent } from './components/shop/shop.component';
 import { CommonModule } from '@angular/common';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroSliderComponent, ShopComponent,FormularioComponent,],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, CommonModule, ReactiveFormsModule],
+  declarations: [
+    AppComponent,
+    HeroSliderComponent,
+    ShopComponent,
+    FormularioComponent,
+    ShopCartComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
 })
