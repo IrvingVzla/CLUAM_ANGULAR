@@ -1,5 +1,5 @@
 <!-- Shopping Cart Section Begin -->
-<section class="shopping-cart spad" style="width: 99%">
+<section class="shopping-cart spad" style="width: 99%; margin-top: 30px">
   <div class="row">
     <div class="col-lg-12">
       <h2 class="section-title title-shop-cart">Carrito de compras</h2>
@@ -15,7 +15,7 @@
               <tr>
                 <th>Producto</th>
                 <th>Nombre</th>
-                <th>Cantidad</th>
+                <th style="padding-left: 15px">Cantidad</th>
                 <th>Total</th>
                 <th></th>
               </tr>
@@ -40,9 +40,29 @@
                   <h6>{{ grouped.product.title }}</h6>
                 </td>
                 <td class="quantity__item">
-                  <div class="quantity">
+                  <div class="quantity" style="padding-left: 15px">
                     <div class="pro-qty-2">
-                      <input type="text" [value]="grouped.quantity" readonly />
+                      <div class="pro-qty-2 d-flex align-items-center">
+                        <button
+                          class="btn btn-sm btn-outline-secondary"
+                          (click)="decreaseQuantity(grouped.product)"
+                        >
+                          −
+                        </button>
+                        <input
+                          type="text"
+                          [value]="grouped.quantity"
+                          readonly
+                          class="mx-2 text-center"
+                          style="width: 25px"
+                        />
+                        <button
+                          class="btn btn-sm btn-outline-secondary"
+                          (click)="increaseQuantity(grouped.product)"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -62,29 +82,54 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="continue__btn">
-              <a href="#">Continuar Comprando</a>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="continue__btn update__btn">
-              <a href="#"><i class="fa fa-spinner"></i> Actualizar carro</a>
+              <a routerLink="/shop">Continuar Comprando</a>
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="cart__discount">
-          <h6>Codigo de descuento</h6>
-          <form action="#">
-            <input type="text" placeholder="Cupon" />
-            <button type="submit">Aplicar</button>
+          <h6>Código de descuento</h6>
+          <form (ngSubmit)="applyDiscount()">
+            <input
+              type="text"
+              [(ngModel)]="discountCode"
+              name="discountCode"
+              placeholder="Cupón"
+              required
+            />
+            <button type="submit" class="btn btn-primary btn-sm">
+              Aplicar
+            </button>
           </form>
+
+          <!-- ALERTA DE BOOTSTRAP -->
+          <div
+            *ngIf="discountApplied"
+            class="alert alert-success mt-2"
+            role="alert"
+          >
+            ¡Descuento aplicado con éxito!
+          </div>
+
+          <div
+            *ngIf="discountError"
+            class="alert alert-warning mt-2"
+            role="alert"
+          >
+            ¡El código de descuento no es válido!
+          </div>
         </div>
+
         <div class="cart__total">
           <h6>Carro total</h6>
           <ul>
-            <li>Subtotal <span>$ 169.50</span></li>
-            <li>Total <span>$ 169.50</span></li>
+            <li>
+              Subtotal <span>${{ originalPrice.toFixed(2) }}</span>
+            </li>
+            <li>
+              Total <span>${{ totalPrice.toFixed(2) }}</span>
+            </li>
           </ul>
           <a href="#" class="primary-btn">Proceder al pago</a>
         </div>

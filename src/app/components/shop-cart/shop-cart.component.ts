@@ -12,6 +12,11 @@ export class ShopCartComponent implements OnInit {
   productsInCart: Product[] = [];
   groupedProducts: { product: Product; quantity: number }[] = [];
   totalPrice: number = 0;
+  originalPrice: number = 0;
+
+  discountCode: string = '';
+  discountApplied: boolean = false;
+  discountError: boolean = false;
 
   constructor(private cartService: CartService) {}
 
@@ -21,9 +26,10 @@ export class ShopCartComponent implements OnInit {
       this.groupProducts();
     });
 
-    this.cartService.totalPrice$.subscribe(
-      (price) => (this.totalPrice = price)
-    );
+    this.cartService.totalPrice$.subscribe((price) => {
+      this.originalPrice = price;
+      this.totalPrice = price;
+    });
   }
 
   groupProducts(): void {
@@ -37,10 +43,45 @@ export class ShopCartComponent implements OnInit {
       }
     });
 
-    this.groupedProducts = Array.from(grouped.values());
+    this.groupedProducts = Array.from(grouped.values()).sort((a, b) =>
+      a.product.title.localeCompare(b.product.title)
+    );
   }
 
   removeProduct(product: Product): void {
     this.cartService.removeFromCart(product);
+  }
+
+  increaseQuantity(product: Product): void {
+    this.cartService.addToCart(product);
+  }
+
+  decreaseQuantity(product: Product): void {
+    const index = this.productsInCart.findIndex(
+      (p) => p.title === product.title
+    );
+    if (index !== -1) {
+      this.productsInCart.splice(index, 1);
+      this.cartService.setProducts([...this.productsInCart]);
+      this.cartService.decreaseTotal(product.price);
+      this.groupProducts();
+    }
+  }
+
+  applyDiscount(): void {
+    if (this.discountApplied) {
+      alert('Ya has aplicado el código de descuento.');
+      return;
+    }
+
+    if (this.discountCode.trim().toUpperCase() === 'DESCUENTO20') {
+      const discount = this.originalPrice * 0.2;
+      this.totalPrice = this.originalPrice - discount;
+      this.discountApplied = true;
+      this.discountError = false;
+    } else {
+      this.discountApplied = false;
+      this.discountError = true;
+    }
   }
 }

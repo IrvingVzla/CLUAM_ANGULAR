@@ -29,4 +29,13 @@ export class CartService {
     this.cartItems.next(this.cartItems.value - 1);
     this.totalPrice.next(this.totalPrice.value - product.price);
   }
+
+  setProducts(products: Product[]): void {
+    this.productsInCart.next(products);
+    this.cartItems.next(products.length);
+  }
+
+  decreaseTotal(price: number): void {
+    this.totalPrice.next(this.totalPrice.value - price);
+  }
 }

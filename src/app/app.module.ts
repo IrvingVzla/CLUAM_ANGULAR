@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],

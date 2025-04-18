@@ -19,69 +19,63 @@
 <div class="page-container">
   <!-- Header -->
   <header class="header">
-    <header class="header">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-3">
-            <div class="header__logo">
-              <a href="./index.html"
-                ><img src="assets/img/logo.png" alt="Logo"
-              /></a>
-            </div>
-          </div>
-          <div class="col-lg-5 col-md-6">
-            <nav class="header__menu mobile-menu">
-              <ul>
-                <li
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                >
-                  <a routerLink="/home">Home</a>
-                </li>
-                <li routerLinkActive="active">
-                  <a routerLink="/shop">Compra</a>
-                </li>
-                <li routerLinkActive="active">
-                  <a routerLink="/contacto">Contactenos</a>
-                </li>
-                <li>
-                  <a href="#">Secciones</a>
-                  <ul class="dropdown">
-                    <li><a routerLink="/about">About Us</a></li>
-                    <li><a routerLink="/shop-details">Shop Details</a></li>
-                  </ul>
-                </li>
-                <li routerLinkActive="active"></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="col-lg-4 col-md-3">
-            <div class="header__nav__option">
-              <input
-                class="form-control-sm search-input"
-                type="text"
-                placeholder="Buscar..."
-              />
-              <a href="#" class="search-switch">
-                <img src="assets/img/icon/search.png" alt="" />
-              </a>
-
-              <a routerLink="/shop-cart"
-                ><img
-                  src="assets/img/icon/cart.png"
-                  style="width: 22px"
-                  alt=""
-                />
-                <span>{{ cartItems }}</span></a
-              >
-
-              <div class="price">${{ totalPrice.toFixed(2) }}</div>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3">
+          <div class="header__logo">
+            <a href="./index.html"
+              ><img src="assets/img/logo.png" alt="Logo"
+            /></a>
           </div>
         </div>
-        <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        <div class="col-lg-5 col-md-6">
+          <nav class="header__menu mobile-menu">
+            <ul>
+              <li
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <a routerLink="/home">Home</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/shop">Compra</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/contacto">Contactenos</a>
+              </li>
+              <li>
+                <a href="#">Secciones</a>
+                <ul class="dropdown">
+                  <li><a routerLink="/about">About Us</a></li>
+                  <li><a routerLink="/shop-details">Shop Details</a></li>
+                </ul>
+              </li>
+              <li routerLinkActive="active"></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-4 col-md-3">
+          <div class="header__nav__option">
+            <input
+              class="form-control-sm search-input"
+              type="text"
+              placeholder="Buscar..."
+            />
+            <a href="#" class="search-switch">
+              <img src="assets/img/icon/search.png" alt="" />
+            </a>
+
+            <a routerLink="/shop-cart"
+              ><img src="assets/img/icon/cart.png" style="width: 22px" alt="" />
+              <span>{{ cartItems }}</span></a
+            >
+
+            <div class="price">${{ totalPrice.toFixed(2) }}</div>
+          </div>
+        </div>
       </div>
-    </header>
+      <div class="canvas__open"><i class="fa fa-bars"></i></div>
+    </div>
   </header>
 
   <!-- Contenido principal -->
@@ -107,88 +101,6 @@
     </footer>
   </footer>
 </div>
-
-<!-- Header Section Begin -->
-<!--<header class="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-3">
-        <div class="header__logo">
-          <a href="./index.html"
-            ><img src="assets/img/logo.png" alt="Logo"
-          /></a>
-        </div>
-      </div>
-      <div class="col-lg-5 col-md-6">
-        <nav class="header__menu mobile-menu">
-          <ul>
-            <li
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <a routerLink="/home">Home</a>
-            </li>
-            <li routerLinkActive="active"><a routerLink="/shop">Compra</a></li>
-            <li routerLinkActive="active">
-              <a routerLink="/contacto">Contactenos</a>
-            </li>
-            <li>
-              <a href="#">Secciones</a>
-              <ul class="dropdown">
-                <li><a routerLink="/about">About Us</a></li>
-                <li><a routerLink="/shop-details">Shop Details</a></li>
-              </ul>
-            </li>
-            <li routerLinkActive="active"></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-lg-4 col-md-3">
-        <div class="header__nav__option">
-          <input
-            class="form-control-sm search-input"
-            type="text"
-            placeholder="Buscar..."
-          />
-          <a href="#" class="search-switch">
-            <img src="assets/img/icon/search.png" alt="" />
-          </a>
-
-          <a routerLink="/shop-cart"
-            ><img src="assets/img/icon/cart.png" style="width: 22px" alt="" />
-            <span>{{ cartItems }}</span></a
-          >
-
-          <div class="price">${{ totalPrice.toFixed(2) }}</div>
-        </div>
-      </div>
-    </div>
-    <div class="canvas__open"><i class="fa fa-bars"></i></div>
-  </div>
-</header>-->
-
-<!-- Componente slider -->
-<!--<app-hero-slider></app-hero-slider> -->
-
-<!-- Router outlet -->
-<!--<router-outlet></router-outlet>-->
-
-<!-- Footer Section Begin -->
-<!--<footer class="footer" style="padding: 0px">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <div class="footer__copyright__text">
-          <p>
-            Copyright © {{ fechaActual | date : "yyyy" }}
-            | Cluam - Todos los derechos reservados.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>-->
-<!-- Footer Section End -->
 
 <!-- Search Begin -->
 <div class="search-model">
