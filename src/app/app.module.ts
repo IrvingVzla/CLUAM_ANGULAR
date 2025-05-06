@@ -14,6 +14,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { FormsModule } from '@angular/forms';
+import { FiltersModule } from './filters/filters.module'; 
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
+    FiltersModule,
     ReactiveFormsModule,
     FormsModule,
   ],

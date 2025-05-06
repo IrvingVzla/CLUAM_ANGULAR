@@ -1,0 +1,64 @@
+<div class="filter-container">
+    <button class="filter-button primary-btn" (click)="toggleFilters()">
+      <i class="fa fa-filter"></i> Filtrar Productos
+    </button>
+    
+    <div class="filter-sidebar" [class.show]="showFilters">
+      <div class="filter-header">
+        <h4>Filtros</h4>
+        <button class="close-btn" (click)="toggleFilters()">×</button>
+      </div>
+      
+      <form [formGroup]="filterForm">
+        <div class="filter-section">
+          <h5>Categorías</h5>
+          <div class="form-group">
+            <select formControlName="category" class="form-control">
+              <option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <h5>Rango de Precios</h5>
+          <div class="price-inputs">
+            <div class="form-group">
+              <label>Mínimo ($)</label>
+              <input type="number" formControlName="minPrice" class="form-control" min="0">
+            </div>
+            <div class="form-group">
+              <label>Máximo ($)</label>
+              <input type="number" formControlName="maxPrice" class="form-control" min="0">
+            </div>
+          </div>
+          <div class="price-slider">
+            <input type="range" formControlName="minPrice" min="0" max="1000" step="10" class="range-input">
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <h5>Ordenar Por</h5>
+          <div class="form-group">
+            <select formControlName="sort" class="form-control">
+              <option value="default">Destacados</option>
+              <option value="price_asc">Precio: Menor a Mayor</option>
+              <option value="price_desc">Precio: Mayor a Menor</option>
+              <option value="name_asc">Nombre: A-Z</option>
+              <option value="name_desc">Nombre: Z-A</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="filter-actions">
+          <button type="button" class="primary-btn apply-btn" (click)="applyFilters()">
+            Aplicar Filtros
+          </button>
+          <button type="button" class="secondary-btn" (click)="resetFilters()">
+            Restablecer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -5,6 +5,13 @@
         <h2 class="section-title">Nuestra Tienda</h2>
       </div>
     </div>
+    
+    <!-- Componente de filtros -->
+    <div class="row">
+      <div class="col-12">
+        <app-filter-sidebar (filtersChanged)="applyFilters($event)"></app-filter-sidebar>
+      </div>
+    </div>
 
     <!-- Loading spinner -->
     <div class="text-center py-5" *ngIf="loading">
@@ -21,7 +28,7 @@
 
     <!-- Products grid -->
     <div class="row products-container" *ngIf="!loading && !error">
-      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of filteredProducts">
         <div class="product-item" *ngIf="product">
           <div class="product-img">
             <img
@@ -42,6 +49,14 @@
         <div *ngIf="!product" class="no-product">
           No hay productos disponibles
         </div>
+      </div>
+      
+      <!-- No products after filtering -->
+      <div class="col-12 text-center py-5" *ngIf="filteredProducts.length === 0 && !loading && !error">
+        <p>No se encontraron productos que coincidan con los filtros seleccionados.</p>
+        <button class="primary-btn mt-3" (click)="applyFilters({category: 'Todos'})">
+          Ver todos los productos
+        </button>
       </div>
     </div>
 
