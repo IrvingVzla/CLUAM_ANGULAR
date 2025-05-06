@@ -14,6 +14,7 @@ export class CartService {
   totalPrice$ = this.totalPrice.asObservable();
   productsInCart$ = this.productsInCart.asObservable();
 
+  // Agregar un producto al carrito
   addToCart(product: Product): void {
     const currentProducts = this.productsInCart.value;
     this.productsInCart.next([...currentProducts, product]);
@@ -21,20 +22,27 @@ export class CartService {
     this.totalPrice.next(this.totalPrice.value + product.price);
   }
 
+  // Remover un producto del carrito
   removeFromCart(product: Product): void {
-    const currentProducts = this.productsInCart.value.filter(
-      (p) => p !== product
+    const currentProducts = this.productsInCart.value;
+    const filteredProducts = currentProducts.filter(
+      (p) => p.title !== product.title
     );
-    this.productsInCart.next(currentProducts);
-    this.cartItems.next(this.cartItems.value - 1);
-    this.totalPrice.next(this.totalPrice.value - product.price);
+    const removedCount = currentProducts.length - filteredProducts.length;
+    const totalRemovedPrice = removedCount * product.price;
+
+    this.productsInCart.next(filteredProducts);
+    this.cartItems.next(this.cartItems.value - removedCount);
+    this.totalPrice.next(this.totalPrice.value - totalRemovedPrice);
   }
 
+  // Setear los productos del carrito
   setProducts(products: Product[]): void {
     this.productsInCart.next(products);
     this.cartItems.next(products.length);
   }
 
+  // Disminuir el precio total (Para individuales)
   decreaseTotal(price: number): void {
     this.totalPrice.next(this.totalPrice.value - price);
   }

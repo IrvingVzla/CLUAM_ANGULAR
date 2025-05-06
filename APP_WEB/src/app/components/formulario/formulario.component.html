@@ -1,21 +1,169 @@
-<div style="margin-top: 30px">
-  <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
-    <label for="nombre">Nombre:</label>
-    <input id="nombre" type="text" formControlName="nombre" required />
-
-    <label for="email">Correo Electrónico:</label>
-    <input id="email" type="email" formControlName="email" required />
-
-    <label for="documento">Documento:</label>
-    <input id="documento" type="text" formControlName="documento" required />
-
-    <label for="celular">Celular:</label>
-    <input id="celular" type="tel" formControlName="celular" required />
-
-    <button type="submit" [disabled]="formulario.invalid">Enviar</button>
-  </form>
-
-  <div *ngIf="formularioEnviado">
-    <p>¡Formulario enviado correctamente!</p>
-  </div>
+<!-- Map Begin -->
+<div class="map">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4122019122183!2d-74.09386881538593!3d4.698230029517544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b31ce6d5835%3A0x3b5b6f123d35a1e3!2sUniminuto%20Calle%2080%20Sede%20Principal!5e0!3m2!1ses!2sco!4v1746553575800!5m2!1ses!2sco"
+    width="600"
+    height="500"
+    style="border: 0"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
 </div>
+
+<br /><br />
+<!-- Map End -->
+
+<!-- Contact Section Begin -->
+<section class="contact spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__text">
+          <div class="section-title">
+            <span>Información</span>
+            <h2>Contáctenos</h2>
+            <p>
+              ¿Tienes preguntas, sugerencias o simplemente quieres saludarnos?
+              ¡Estamos felices de escucharte! En Cluam, valoramos cada voz que
+              hace parte de nuestra comunidad consciente.
+            </p>
+          </div>
+          <ul>
+            <li>
+              <h4><i class="fas fa-map-marker-alt"></i> Bogotá - Colombia</h4>
+              <p>
+                Cra. 74 #81 C-05, Engativá, Bogotá<br />+57 300 123 4567 <br />
+              </p>
+            </li>
+
+            <li>
+              <h4><i class="fas fa-map-marker-alt"></i> Medellin - Colombia</h4>
+              <p>
+                Cl. 45, La Gabriela, Bello, Antioquia <br />+57 300 123 4567
+                <br />
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form">
+          <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+            <div class="row">
+              <div class="col-lg-6">
+                <small
+                  class="text-danger"
+                  [style.visibility]="
+                    formulario.get('nombre')?.touched &&
+                    formulario.get('nombre')?.hasError('required')
+                      ? 'visible'
+                      : 'hidden'
+                  "
+                >
+                  El nombre es requerido.
+                </small>
+
+                <input
+                  id="nombre"
+                  type="text"
+                  placeholder="Nombre"
+                  formControlName="nombre"
+                  required
+                />
+              </div>
+
+              <div class="col-lg-6">
+                <small
+                  class="text-danger"
+                  [style.visibility]="
+                    formulario.get('email')?.touched &&
+                    (formulario.get('email')?.hasError('required') ||
+                      formulario.get('email')?.hasError('email'))
+                      ? 'visible'
+                      : 'hidden'
+                  "
+                >
+                  El correo no es válido.
+                </small>
+
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  formControlName="email"
+                  required
+                />
+              </div>
+
+              <div class="col-lg-6">
+                <small
+                  class="text-danger"
+                  [style.visibility]="
+                    formulario.get('documento')?.touched &&
+                    formulario.get('documento')?.hasError('required')
+                      ? 'visible'
+                      : 'hidden'
+                  "
+                >
+                  El documento es requerido.
+                </small>
+
+                <input
+                  id="documento"
+                  placeholder="Documento"
+                  type="text"
+                  formControlName="documento"
+                  required
+                />
+              </div>
+
+              <div class="col-lg-6">
+                <small
+                  class="text-danger"
+                  [style.visibility]="
+                    formulario.get('celular')?.touched &&
+                    formulario.get('celular')?.hasError('required')
+                      ? 'visible'
+                      : 'hidden'
+                  "
+                >
+                  El celular es requerido.
+                </small>
+
+                <input
+                  id="celular"
+                  placeholder="Celular"
+                  type="tel"
+                  formControlName="celular"
+                  required
+                />
+              </div>
+
+              <div class="col-lg-12">
+                <textarea placeholder="Mensaje"></textarea>
+                <button
+                  type="submit"
+                  [disabled]="formulario.invalid"
+                  class="site-btn"
+                >
+                  Enviar
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <br />
+
+          <div
+            [ngStyle]="{ visibility: formularioEnviado ? 'visible' : 'hidden' }"
+            class="alert alert-success mt-2"
+            role="alert"
+          >
+            ¡Formulario enviado correctamente!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

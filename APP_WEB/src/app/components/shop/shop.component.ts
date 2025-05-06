@@ -27,10 +27,7 @@ export class ShopComponent implements OnInit {
         next: (data) => {
           this.products = data;
           this.filteredProducts = [...this.products];
-
-          console.log(this.products);
           this.loading = false;
-          
         },
         error: (err) => {
           this.error =
@@ -47,31 +44,32 @@ export class ShopComponent implements OnInit {
 
   applyFilters(filters: FilterOptions) {
     this.loading = true;
-    
+
     // Simular tiempo de carga para una mejor experiencia de usuario
     setTimeout(() => {
       // Filtrar productos según los criterios
       let result = [...this.products];
-      
+
       // Filtrar por categoría
       if (filters.category && filters.category !== 'Todos') {
-        result = result.filter(product => 
-          // Aquí deberías ajustar según la estructura real de tus datos
-          // Asumiendo que hay una propiedad category en tus productos
-          product.category && product.category.name === filters.category
+        result = result.filter(
+          (product) =>
+            // Aquí deberías ajustar según la estructura real de tus datos
+            // Asumiendo que hay una propiedad category en tus productos
+            product.category && product.category.name === filters.category
         );
       }
-      
+
       // Filtrar por precio mínimo
       if (filters.minPrice !== undefined && filters.minPrice > 0) {
-        result = result.filter(product => product.price >= filters.minPrice!);
+        result = result.filter((product) => product.price >= filters.minPrice!);
       }
-      
+
       // Filtrar por precio máximo
       if (filters.maxPrice !== undefined) {
-        result = result.filter(product => product.price <= filters.maxPrice!);
+        result = result.filter((product) => product.price <= filters.maxPrice!);
       }
-      
+
       // Ordenar productos
       if (filters.sort) {
         switch (filters.sort) {
@@ -89,11 +87,9 @@ export class ShopComponent implements OnInit {
             break;
         }
       }
-      
+
       this.filteredProducts = result;
       this.loading = false;
     }, 500);
   }
 }
-
-
