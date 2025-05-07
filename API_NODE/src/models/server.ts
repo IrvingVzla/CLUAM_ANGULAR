@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import routesProducto from "../routes/producto";
+import db from '../db/conexion';
 
 class Server {
   private app: Application;
@@ -13,6 +14,7 @@ class Server {
     this.routes();
     this.listen();
     this.midlewares();
+    this.dbConnect();
   }
 
   // Middleware para manejar errores
@@ -43,6 +45,11 @@ class Server {
 
   midlewares() {
     this.app.use(express.json());
+  }
+
+  async dbConnect(){
+    await db.authenticate();
+    console.log('Base de Datos Conectada');
   }
 }
 
