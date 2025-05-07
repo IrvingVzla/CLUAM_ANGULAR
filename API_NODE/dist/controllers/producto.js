@@ -74,13 +74,10 @@ let products = [
         images: ["https://example.com/mesa.jpg"],
     },
 ];
-// Funciones para manejar las rutas de productos
-// Obtener todos los productos (GET)
 const getProducts = (req, res) => {
     return res.json(products);
 };
 exports.getProducts = getProducts;
-// Obtener un producto por ID (GET)
 const getProduct = (req, res) => {
     const product = products.find((p) => p.id === Number(req.params.id));
     if (!product) {
@@ -89,14 +86,12 @@ const getProduct = (req, res) => {
     return res.json(product);
 };
 exports.getProduct = getProduct;
-// Eliminar un producto por ID (DELETE)
 const deleteProduct = (req, res) => {
     const id = Number(req.params.id);
     products = products.filter((p) => p.id !== id);
     return res.json({ msg: "Producto eliminado", id });
 };
 exports.deleteProduct = deleteProduct;
-// Crear un nuevo producto (POST)
 const postProduct = (req, res) => {
     var _a;
     const newProduct = req.body;
@@ -110,7 +105,6 @@ const postProduct = (req, res) => {
     return res.status(201).json(newProduct);
 };
 exports.postProduct = postProduct;
-// Actualizar un producto por ID (PUT)
 const updateProduct = (req, res) => {
     const id = Number(req.params.id);
     const index = products.findIndex((p) => p.id === id);
