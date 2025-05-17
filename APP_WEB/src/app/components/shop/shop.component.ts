@@ -21,21 +21,19 @@ export class ShopComponent implements OnInit {
   constructor(private http: HttpClient, private cartService: CartService) {}
 
   ngOnInit() {
-    this.http
-      .get<Product[]>('https://api.escuelajs.co/api/v1/products')
-      .subscribe({
-        next: (data) => {
-          this.products = data;
-          this.filteredProducts = [...this.products];
-          this.loading = false;
-        },
-        error: (err) => {
-          this.error =
-            'Error al cargar los productos. Intente nuevamente más tarde.';
-          this.loading = false;
-          console.error('Error cargando productos:', err);
-        },
-      });
+    this.http.get<Product[]>('http://localhost:3000/api/productos').subscribe({
+      next: (data) => {
+        this.products = data;
+        this.filteredProducts = [...this.products];
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error =
+          'Error al cargar los productos. Intente nuevamente más tarde.';
+        this.loading = false;
+        console.error('Error cargando productos:', err);
+      },
+    });
   }
 
   addProductToCart(product: Product): void {
