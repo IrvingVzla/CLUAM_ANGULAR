@@ -6,10 +6,13 @@
       </div>
     </div>
     
-    <!-- Componente de filtros -->
+    <!-- Componente de filtros con categorías dinámicas -->
     <div class="row">
       <div class="col-12">
-        <app-filter-sidebar (filtersChanged)="applyFilters($event)"></app-filter-sidebar>
+        <app-filter-sidebar 
+          [categories]="categories"
+          (filtersChanged)="applyFilters($event)">
+        </app-filter-sidebar>
       </div>
     </div>
 
@@ -36,11 +39,25 @@
               [src]="product.images[0]"
               alt="{{ product.title }}"
               class="img-fluid"
+              
             />
+            <!-- Imagen placeholder si no hay imágenes -->
+            <div *ngIf="!product.images || product.images.length === 0" class="no-image-placeholder">
+              <i class="fa fa-image"></i>
+              <p>Sin imagen</p>
+            </div>
           </div>
           <div class="product-info">
             <h5>{{ product.title }}</h5>
             <h6 class="price">${{ product.price }}</h6>
+            <!-- Mostrar categoría si está disponible -->
+            <p class="product-category" *ngIf="product.category">
+              <i class="fa fa-tag"></i> {{ product.category.name }}
+            </p>
+            <!-- Mostrar descripción si está disponible -->
+            <p class="product-description" *ngIf="product.description">
+              {{ product.description | slice:0:80 }}...
+            </p>
             <button class="primary-btn" (click)="addProductToCart(product)">
               Añadir al carrito
             </button>

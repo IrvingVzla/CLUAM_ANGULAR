@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import routesProducto from "../routes/producto";
+import routesContacto from "../routes/contacto";
 import sequelize from "../config/db";
 
 class Server {
@@ -30,15 +31,23 @@ class Server {
   private middlewares() {
     this.app.use(cors()); // habilita CORS
     this.app.use(express.json()); // parsea JSON
+    this.app.use(express.urlencoded({ extended: true })); // parsea form data
   }
 
   // Definición de rutas
   private routes() {
     this.app.get("/", (req: Request, res: Response) => {
-      res.json({ msg: "API Working" });
+      res.json({ 
+        msg: "API Working",
+        endpoints: {
+          productos: "/api/productos",
+          contacto: "/api/contacto"
+        }
+      });
     });
 
     this.app.use("/api/productos", routesProducto);
+    this.app.use("/api/contacto", routesContacto); 
 
     // Manejar 404
     this.app.use((req, res) => {

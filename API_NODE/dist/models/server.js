@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const producto_1 = __importDefault(require("../routes/producto"));
+const contacto_1 = __importDefault(require("../routes/contacto"));
 const db_1 = __importDefault(require("../config/db"));
 class Server {
     constructor() {
@@ -40,13 +41,21 @@ class Server {
     middlewares() {
         this.app.use((0, cors_1.default)()); // habilita CORS
         this.app.use(express_1.default.json()); // parsea JSON
+        this.app.use(express_1.default.urlencoded({ extended: true })); // parsea form data
     }
     // Definición de rutas
     routes() {
         this.app.get("/", (req, res) => {
-            res.json({ msg: "API Working" });
+            res.json({
+                msg: "API Working",
+                endpoints: {
+                    productos: "/api/productos",
+                    contacto: "/api/contacto"
+                }
+            });
         });
         this.app.use("/api/productos", producto_1.default);
+        this.app.use("/api/contacto", contacto_1.default);
         // Manejar 404
         this.app.use((req, res) => {
             res.status(404).json({ msg: "Ruta no encontrada" });

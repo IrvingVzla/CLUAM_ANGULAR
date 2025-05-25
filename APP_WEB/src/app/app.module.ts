@@ -14,7 +14,8 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { FormsModule } from '@angular/forms';
-import { FiltersModule } from './filters/filters.module'; 
+// Importa el componente directamente en lugar del módulo
+import { FilterSidebarComponent } from './filters/filter-sidebar/filter-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +24,16 @@ import { FiltersModule } from './filters/filters.module';
     ShopComponent,
     FormularioComponent,
     ShopCartComponent,
+    FilterSidebarComponent, 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    FiltersModule,
     ReactiveFormsModule,
     FormsModule,
+   
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],

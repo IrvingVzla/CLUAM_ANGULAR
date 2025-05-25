@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+// src/app/filters/filter-sidebar/filter-sidebar.component.ts
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-// Interface para los filtros
 export interface FilterOptions {
   category?: string;
   minPrice?: number;
@@ -18,10 +18,9 @@ export interface FilterOptions {
 export class FilterSidebarComponent implements OnInit {
   filterForm: FormGroup;
   showFilters = false;
-  categories = [
-    'Todos', 'Ropa', 'Electrónica', 'Joyería', 'Accesorios'
-  ];
   
+  // Recibir las categorías desde el componente padre
+  @Input() categories: string[] = ['Todos'];
   @Output() filtersChanged = new EventEmitter<FilterOptions>();
   
   constructor(private fb: FormBuilder) {
