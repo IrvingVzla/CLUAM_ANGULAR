@@ -120,22 +120,11 @@
                 >
                   El documento es requerido.
                 </small>
-                <small
-                  class="text-danger"
-                  [style.visibility]="
-                    formulario.get('documento')?.touched &&
-                    formulario.get('documento')?.hasError('pattern')
-                      ? 'visible'
-                      : 'hidden'
-                  "
-                >
-                  Solo se permiten números.
-                </small>
 
                 <input
                   id="documento"
                   placeholder="Documento"
-                  type="text"
+                  type="number"
                   formControlName="documento"
                   required
                 />
@@ -168,7 +157,7 @@
                 <input
                   id="celular"
                   placeholder="Celular"
-                  type="tel"
+                  type="number"
                   formControlName="celular"
                   required
                 />
@@ -197,14 +186,14 @@
                 >
                   Mínimo 10 caracteres.
                 </small>
-                
-                <textarea 
+
+                <textarea
                   placeholder="Mensaje"
                   formControlName="mensaje"
                   rows="5"
                   required
                 ></textarea>
-                
+
                 <button
                   type="submit"
                   [disabled]="formulario.invalid || enviando"
@@ -225,7 +214,8 @@
             class="alert alert-success mt-2"
             role="alert"
           >
-            ¡Formulario enviado correctamente! Nos pondremos en contacto contigo pronto.
+            ¡Formulario enviado correctamente! Nos pondremos en contacto contigo
+            pronto.
           </div>
 
           <!-- Mensaje de error -->

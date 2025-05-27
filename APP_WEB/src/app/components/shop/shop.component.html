@@ -5,13 +5,14 @@
         <h2 class="section-title">Nuestra Tienda</h2>
       </div>
     </div>
-    
+
     <!-- Componente de filtros con categorías dinámicas -->
     <div class="row">
       <div class="col-12">
-        <app-filter-sidebar 
+        <app-filter-sidebar
           [categories]="categories"
-          (filtersChanged)="applyFilters($event)">
+          (filtersChanged)="applyFilters($event)"
+        >
         </app-filter-sidebar>
       </div>
     </div>
@@ -31,18 +32,23 @@
 
     <!-- Products grid -->
     <div class="row products-container" *ngIf="!loading && !error">
-      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of filteredProducts">
+      <div
+        class="col-lg-4 col-md-6 mb-4"
+        *ngFor="let product of filteredProducts"
+      >
         <div class="product-item" *ngIf="product">
           <div class="product-img">
             <img
               *ngIf="product.images && product.images.length > 0"
               [src]="product.images[0]"
               alt="{{ product.title }}"
-              class="img-fluid"
-              
+              class="img-new"
             />
             <!-- Imagen placeholder si no hay imágenes -->
-            <div *ngIf="!product.images || product.images.length === 0" class="no-image-placeholder">
+            <div
+              *ngIf="!product.images || product.images.length === 0"
+              class="no-image-placeholder"
+            >
               <i class="fa fa-image"></i>
               <p>Sin imagen</p>
             </div>
@@ -56,7 +62,7 @@
             </p>
             <!-- Mostrar descripción si está disponible -->
             <p class="product-description" *ngIf="product.description">
-              {{ product.description | slice:0:80 }}...
+              {{ product.description | slice : 0 : 80 }}...
             </p>
             <button class="primary-btn" (click)="addProductToCart(product)">
               Añadir al carrito
@@ -67,11 +73,20 @@
           No hay productos disponibles
         </div>
       </div>
-      
+
       <!-- No products after filtering -->
-      <div class="col-12 text-center py-5" *ngIf="filteredProducts.length === 0 && !loading && !error">
-        <p>No se encontraron productos que coincidan con los filtros seleccionados.</p>
-        <button class="primary-btn mt-3" (click)="applyFilters({category: 'Todos'})">
+      <div
+        class="col-12 text-center py-5"
+        *ngIf="filteredProducts.length === 0 && !loading && !error"
+      >
+        <p>
+          No se encontraron productos que coincidan con los filtros
+          seleccionados.
+        </p>
+        <button
+          class="primary-btn mt-3"
+          (click)="applyFilters({ category: 'Todos' })"
+        >
           Ver todos los productos
         </button>
       </div>
